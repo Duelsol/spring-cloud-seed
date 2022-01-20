@@ -18,8 +18,8 @@
 
     <modules>
         <module>gateway-service</module>
-        <module>nacos-spring-cloud-consumer-example</module>
-        <module>nacos-spring-cloud-provider-example</module>
+        <module>consumer-service</module>
+        <module>provider-service</module>
     </modules>
 
     <dependencyManagement>
