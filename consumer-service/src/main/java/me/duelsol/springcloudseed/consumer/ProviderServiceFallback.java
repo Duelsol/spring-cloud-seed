@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
  * @author 冯奕骅
  */
 @Service
-public class NacosProviderFallback implements NacosProviderClient {
+public class ProviderServiceFallback implements ProviderServiceClient {
 
     @Override
     public String echo(String string) {

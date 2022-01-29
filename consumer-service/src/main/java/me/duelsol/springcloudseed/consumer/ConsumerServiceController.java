@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 冯奕骅
  */
 @RestController
-public class NacosConsumerController {
+public class ConsumerServiceController {
 
     @Autowired
-    private NacosProviderClient nacosProviderClient;
+    private ProviderServiceClient providerServiceClient;
 
     @RequestMapping(value = "/echo/{str}", method = RequestMethod.GET)
     public String echo(@PathVariable String str) {
-        return nacosProviderClient.echo(str);
+        return providerServiceClient.echo(str);
     }
 
 }

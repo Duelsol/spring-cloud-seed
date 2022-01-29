@@ -1,4 +1,4 @@
-package me.duelsol.springcloudseed.gateway.service;
+package me.duelsol.springcloudseed.gateway;
 
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;

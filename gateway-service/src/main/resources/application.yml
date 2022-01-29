@@ -11,22 +11,4 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
           lower-case-service-id: true
-      default-filters:
-        - name: Hystrix
-          args:
-            name: fallbackCommand
-            fallbackUri: forward:/fallback
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 30000
-
-ribbon:
-  ConnectTimeout: 5000
-  ReadTimeout: 30000

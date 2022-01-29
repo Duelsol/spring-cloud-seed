@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 冯奕骅
  */
 @RestController
-public class NacosProviderController {
+public class ProviderServiceController {
 
     @RequestMapping(value = "/echo/{string}", method = RequestMethod.GET)
     public String echo(@PathVariable String string) {

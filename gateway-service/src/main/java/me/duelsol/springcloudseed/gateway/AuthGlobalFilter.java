@@ -1,4 +1,4 @@
-package me.duelsol.springcloudseed.gateway.filter;
+package me.duelsol.springcloudseed.gateway;
 
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

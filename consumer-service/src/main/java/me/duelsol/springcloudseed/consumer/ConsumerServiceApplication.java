@@ -11,10 +11,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
-public class NacosConsumerApplication {
+public class ConsumerServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NacosConsumerApplication.class, args);
+        SpringApplication.run(ConsumerServiceApplication.class, args);
     }
 
 }
