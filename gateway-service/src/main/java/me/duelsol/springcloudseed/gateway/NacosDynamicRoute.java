@@ -1,11 +1,11 @@
 package me.duelsol.springcloudseed.gateway;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.alibaba.nacos.shaded.com.google.gson.Gson;
-import com.google.common.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
@@ -25,13 +25,13 @@ import java.util.concurrent.Executor;
 /**
  * @author 冯奕骅
  */
-@Service
+@Component
 @Slf4j
-public class NacosDynamicRouteService implements ApplicationEventPublisherAware {
+public class NacosDynamicRoute implements ApplicationEventPublisherAware {
 
-    private static final String DATAID = "gateway";
+    private static final String DATA_ID = "gateway-service";
 
-    private static final String GROUP = "DEFAULT_GROUP";
+    private static final String GROUP_ID = "dynamic-route";
 
     @Value("${spring.cloud.nacos.discovery.server-addr}")
     private String serverAddr;
@@ -47,9 +47,9 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void dynamicRouteConfigListener() {
         try {
             ConfigService configService = NacosFactory.createConfigService(serverAddr);
-            String configInfo = configService.getConfig(DATAID, GROUP, 5000);
+            String configInfo = configService.getConfig(DATA_ID, GROUP_ID, 5000);
             parseRoutes(configInfo);
-            configService.addListener(DATAID, GROUP, new Listener() {
+            configService.addListener(DATA_ID, GROUP_ID, new Listener() {
                 @Override
                 public void receiveConfigInfo(String configInfo) {
                     parseRoutes(configInfo);
@@ -67,7 +67,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
 
     private void parseRoutes(String configInfo) {
         clearRoutes();
-        List<RouteDefinition> gatewayRouteDefinitions = new Gson().fromJson(configInfo, new TypeToken<List<RouteDefinition>>(){}.getType());
+        List<RouteDefinition> gatewayRouteDefinitions = JSON.parseObject(configInfo, new TypeReference<List<RouteDefinition>>() {});
         for (RouteDefinition routeDefinition : gatewayRouteDefinitions) {
             addRoute(routeDefinition);
         }
