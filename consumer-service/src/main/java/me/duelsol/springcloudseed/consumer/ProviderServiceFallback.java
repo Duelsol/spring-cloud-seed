@@ -1,16 +1,22 @@
 package me.duelsol.springcloudseed.consumer;
 
-import org.springframework.stereotype.Service;
+import feign.hystrix.FallbackFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * @author 冯奕骅
  */
-@Service
-public class ProviderServiceFallback implements ProviderServiceClient {
+@Component
+public class ProviderServiceFallback implements FallbackFactory<ProviderServiceClient> {
 
     @Override
-    public String echo(String string) {
-        return "fallback";
+    public ProviderServiceClient create(Throwable cause) {
+        return new ProviderServiceClient() {
+            @Override
+            public String echo(String string) {
+                return "fallback";
+            }
+        };
     }
 
 }

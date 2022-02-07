@@ -1,0 +1,30 @@
+server:
+  port: 9092
+
+spring:
+  application:
+    name: consumer-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+      datasource:
+        ds1:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}
+            groupId: sentinel-flow-rule
+            rule-type: flow
+        ds2:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}
+            groupId: sentinel-degrade-rule
+            rule-type: degrade
+
+feign:
+  sentinel:
+    enabled: true
