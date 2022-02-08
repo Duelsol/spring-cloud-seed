@@ -27,11 +27,11 @@ import java.util.concurrent.Executor;
  */
 @Component
 @Slf4j
-public class NacosDynamicRoute implements ApplicationEventPublisherAware {
+public class NacosDynamicRoutes implements ApplicationEventPublisherAware {
 
     private static final String DATA_ID = "gateway-service";
 
-    private static final String GROUP_ID = "dynamic-route";
+    private static final String GROUP_ID = "dynamic-routes";
 
     @Value("${spring.cloud.nacos.discovery.server-addr}")
     private String serverAddr;
