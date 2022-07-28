@@ -28,12 +28,10 @@ public class SentinelConfiguration implements BlockExceptionHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception {
         String message;
-        if (e instanceof FlowException) {
+        if (e instanceof FlowException || e instanceof ParamFlowException) {
             message = "被限流了";
         } else if (e instanceof DegradeException) {
             message = "服务降级了";
-        } else if (e instanceof ParamFlowException) {
-            message = "被限流了";
         } else if (e instanceof SystemBlockException) {
             message = "被系统保护了";
         } else if (e instanceof AuthorityException) {
