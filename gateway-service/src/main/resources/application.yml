@@ -16,3 +16,8 @@ spring:
       discovery:
         locator:
           lower-case-service-id: true
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: PT20S
+        pool:
+          max-idle-time: PT10S
