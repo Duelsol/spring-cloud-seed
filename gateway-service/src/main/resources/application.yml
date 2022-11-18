@@ -20,4 +20,8 @@ spring:
         connect-timeout: 3000
         response-timeout: PT20S
         pool:
-          max-idle-time: PT10S
+          max-idle-time: PT1S
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+      http-method-specify: true

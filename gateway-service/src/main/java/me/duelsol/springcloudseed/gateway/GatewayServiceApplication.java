@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GatewayServiceApplication {
 
 	public static void main(String[] args) {
+        System.setProperty("csp.sentinel.app.type", "1");
+        System.setProperty("reactor.netty.pool.leasingStrategy", "lifo");
 		SpringApplication.run(GatewayServiceApplication.class, args);
 	}
 
